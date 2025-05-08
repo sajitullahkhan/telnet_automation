@@ -9,13 +9,19 @@ if (RegExMatch(UserInput, "^(?P<ip>\d+)\.(?P<type>[ge])\.(?P<port>\d+/\d+)\.(?P<
     port := matchport
     interfaceType := (matchtype = "g") ? "gpon" : "epon"
 
-    DisableKeyboard()
-    RunTelnetAndShowONT(ipPart, interfaceType, port, ontID)
-    EnableKeyboard()
+    ; Only allow specific IPs
+    if (ipPart = "45" || ipPart = "58" || ipPart = "18" || ipPart = "37") {
+        DisableKeyboard()
+        RunTelnetAndShowONT(ipPart, interfaceType, port, ontID)
+        EnableKeyboard()
+    } else {
+        MsgBox, Invalid IP address.`nOnly 45, 58, 18, or 37 are allowed.
+    }
 } else {
     MsgBox, Invalid input format.`nPlease use: IP.TYPE.PORT.ONT`nExample: 58.g.0/1.3
 }
 return
+
 
 RunTelnetAndShowONT(ipPart, type, port, ontID) {
     Send, {Backspace 30}
