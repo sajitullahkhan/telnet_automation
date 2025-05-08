@@ -17,6 +17,18 @@ if (RegExMatch(UserInput, "^(?P<ip>\d+)\.(?P<type>[ge])\.(?P<port>\d+/\d+)\.(?P<
     } else {
         MsgBox, Invalid IP address.`nOnly 45, 58, 18, or 37 are allowed.
     }
+}  else if (RegExMatch(UserInput, "^(?P<ip>\d+)\.$", match)) {
+    ; Only IP given
+    ipPart := matchip
+
+    ; Only allow specific IPs
+    if (ipPart = "45" || ipPart = "58" || ipPart = "18" || ipPart = "37") {
+        DisableKeyboard()
+        RunTelnetToEnableOnly(ipPart)
+        EnableKeyboard()
+    } else {
+        MsgBox, Invalid IP address.`nOnly 45, 58, 18, or 37 are allowed.
+    }
 } else {
     MsgBox, Invalid input format.`nPlease use: IP.TYPE.PORT.ONT`nExample: 58.g.0/1.3
 }
@@ -45,6 +57,21 @@ RunTelnetAndShowONT(ipPart, type, port, ontID) {
     Sleep, 200
     Loop, 10
         Send, {Space}
+}
+
+RunTelnetToEnableOnly(ipPart) {
+    Send, {Backspace 30}
+    ip := "10.10.10." . ipPart
+
+    Send, telnet %ip%{Enter}
+    Sleep, 500
+    Send, support{Enter}
+    Sleep, 300
+    Send, Support@321{#}{Enter}
+    Sleep, 300
+    Send, enable{Enter}
+    Sleep, 300
+    Send, config{Enter}
 }
 
 DisableKeyboard() {
