@@ -30,8 +30,6 @@ RunTelnet(ipPart) {
     EnableKeyboard()
 }
 
-
-
 ::suk::
 Input, UserInput, V L30, {Enter}
 
