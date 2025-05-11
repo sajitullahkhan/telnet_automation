@@ -18,17 +18,25 @@ return
 
 RunTelnet(ipPart) {
     DisableKeyboard()
-    Send, {Backspace 30}
     ip := "10.10.10." . ipPart
-    Send, telnet %ip%{Enter}
+
+    WinTitle := "ahk_class ConsoleWindowClass"
+    
+    ; Send telnet commands directly to the background CMD window
+    ControlSend,, {Backspace 30}, %WinTitle%
+    ControlSend,, telnet %ip%{Enter}, %WinTitle%
     Sleep, 200
-    Send, Support{Enter}
+    ControlSend,, Support{Enter}, %WinTitle%
     Sleep, 200
-    Send, Support@321{#}{Enter}
-    Send, enable{Enter}
-    Send, config{Enter}
+    ControlSend,, Support@321{#}{Enter}, %WinTitle%
+    Sleep, 200
+    ControlSend,, enable{Enter}, %WinTitle%
+    Sleep, 200
+    ControlSend,, config{Enter}, %WinTitle%
+    Sleep, 200
     EnableKeyboard()
 }
+
 
 ::suk::
 Input, UserInput, V L30, {Enter}
@@ -64,28 +72,32 @@ return
 
 
 RunTelnetAndShowONT(ipPart, type, port, ontID) {
-    Send, {Backspace 30}
     ip := "10.10.10." . ipPart
+    WinTitle := "ahk_class ConsoleWindowClass"
 
-    Send, telnet %ip%{Enter}
+    ControlSend,, {Backspace 30}, %WinTitle%
+    ControlSend,, telnet %ip%{Enter}, %WinTitle%
     Sleep, 500
-    Send, support{Enter}
+    ControlSend,, support{Enter}, %WinTitle%
     Sleep, 300
-    Send, Support@321{#}{Enter}
+    ControlSend,, Support@321{#}{Enter}, %WinTitle%
     Sleep, 300
-    Send, enable{Enter}
+    ControlSend,, enable{Enter}, %WinTitle%
     Sleep, 100
-    Send, config{Enter}
+    ControlSend,, config{Enter}, %WinTitle%
     Sleep, 100
-    Send, interface %type% %port%{Enter}
+    ControlSend,, interface %type% %port%{Enter}, %WinTitle%
     Sleep, 300
-    Send, display ont info %ontID% all{Enter}
+    ControlSend,, display ont info %ontID% all{Enter}, %WinTitle%
     Sleep, 300
-    Send, {Enter}
+    ControlSend,, {Enter}, %WinTitle%
     Sleep, 200
-    Loop, 10
-        Send, {Space}
+    Loop, 10 {
+        ControlSend,, {Space}, %WinTitle%
+        Sleep, 100
+    }
 }
+
 
 
 DisableKeyboard() {
