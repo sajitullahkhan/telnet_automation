@@ -25,11 +25,11 @@ RunTelnet(ipPart) {
     ; Send telnet commands directly to the background CMD window
     ControlSend,, {Backspace 30}, %WinTitle%
     ControlSend,, telnet %ip%{Enter}, %WinTitle%
-    Sleep, 200
+    Sleep, 500
     ControlSend,, Support{Enter}, %WinTitle%
-    Sleep, 200
+    Sleep, 500
     ControlSend,, Support@321{#}{Enter}, %WinTitle%
-    Sleep, 200
+    Sleep, 500
     ControlSend,, enable{Enter}, %WinTitle%
     Sleep, 200
     ControlSend,, config{Enter}, %WinTitle%
@@ -79,20 +79,20 @@ RunTelnetAndShowONT(ipPart, type, port, ontID) {
     ControlSend,, telnet %ip%{Enter}, %WinTitle%
     Sleep, 500
     ControlSend,, support{Enter}, %WinTitle%
-    Sleep, 300
+    Sleep, 500
     ControlSend,, Support@321{#}{Enter}, %WinTitle%
-    Sleep, 300
+    Sleep, 500
     ControlSend,, enable{Enter}, %WinTitle%
-    Sleep, 100
+    Sleep, 200
     ControlSend,, config{Enter}, %WinTitle%
-    Sleep, 100
+    Sleep, 200
     ControlSend,, interface %type% %port%{Enter}, %WinTitle%
     Sleep, 300
     ControlSend,, display ont info %ontID% all{Enter}, %WinTitle%
     Sleep, 300
     ControlSend,, {Enter}, %WinTitle%
     Sleep, 200
-    Loop, 10 {
+    Loop, 12 {
         ControlSend,, {Space}, %WinTitle%
         Sleep, 100
     }
