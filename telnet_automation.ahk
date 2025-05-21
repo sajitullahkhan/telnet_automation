@@ -28,7 +28,7 @@ RunTelnet(ipPart) {
     Sleep, 500
     ControlSend,, Support{Enter}, %WinTitle%
     Sleep, 500
-    ControlSend,, Support@321{#}{Enter}, %WinTitle%
+    send, Support@321{#}{Enter}
     Sleep, 500
     ControlSend,, enable{Enter}, %WinTitle%
     Sleep, 200
@@ -80,7 +80,7 @@ RunTelnetAndShowONT(ipPart, type, port, ontID) {
     Sleep, 500
     ControlSend,, support{Enter}, %WinTitle%
     Sleep, 500
-    ControlSend,, Support@321{#}{Enter}, %WinTitle%
+    send, Support@321{#}{Enter}
     Sleep, 500
     ControlSend,, enable{Enter}, %WinTitle%
     Sleep, 200
